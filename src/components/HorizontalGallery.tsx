@@ -20,42 +20,21 @@ export function HorizontalGallery() {
 
       const getScroll = () => Math.max(0, row.scrollWidth - window.innerWidth)
 
-      const tween = gsap.to(row, {
+      gsap.to(row, {
         x: () => -getScroll(),
         ease: 'none',
         scrollTrigger: {
           trigger: el,
           start: 'top top',
-          end: () => `+=${getScroll() + window.innerHeight * 0.35}`,
+          end: () => `+=${getScroll()}`,
           pin: true,
-          scrub: 0.65,
+          scrub: 1,
           anticipatePin: 1,
           invalidateOnRefresh: true,
           onUpdate: (self) => {
-            if (bar.current) {
-              bar.current.style.width = `${self.progress * 100}%`
-            }
+            if (bar.current) bar.current.style.width = `${self.progress * 100}%`
           },
         },
-      })
-
-      gsap.utils.toArray<HTMLElement>('.hgal-card img').forEach((img) => {
-        gsap.fromTo(
-          img,
-          { scale: 1.18, xPercent: -4 },
-          {
-            scale: 1,
-            xPercent: 4,
-            ease: 'none',
-            scrollTrigger: {
-              trigger: img.parentElement,
-              containerAnimation: tween,
-              start: 'left 90%',
-              end: 'right 10%',
-              scrub: true,
-            },
-          },
-        )
       })
     },
     { scope: section },
@@ -63,7 +42,7 @@ export function HorizontalGallery() {
 
   return (
     <section ref={section} className="hgal" aria-label="Works gallery">
-      <div className="hgal-sticky">
+      <div className="hgal-inner">
         <div className="container hgal-head">
           <p className="eyebrow">Collection</p>
           <h2 className="display h2">Pan through the work</h2>
