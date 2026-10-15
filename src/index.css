@@ -88,8 +88,7 @@ img {
 
 .main {
   flex: 1;
-  /* nav + fixed demo banner */
-  padding-top: calc(var(--nav-h) + 2.4rem);
+  padding-top: var(--nav-h);
 }
 
 .container {
@@ -262,15 +261,11 @@ img {
 }
 
 .demo-banner {
-  /* Fixed under nav — sticky + GSAP pin fights Lenis */
-  position: fixed;
-  top: var(--nav-h);
-  left: 0;
-  right: 0;
-  z-index: 40;
-  background: oklch(0.2 0.03 110 / 0.85);
+  /* In flow — scrolls away; fixed/sticky fights GSAP pin + Lenis */
+  position: relative;
+  z-index: 2;
+  background: oklch(0.2 0.03 110 / 0.92);
   border-bottom: 1px solid var(--line);
-  backdrop-filter: blur(14px);
   padding: 0.55rem 1rem;
   text-align: center;
   font-size: 0.82rem;

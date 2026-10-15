@@ -100,11 +100,16 @@
   gap: 0.25rem;
   align-content: start;
   transform: translateY(-104%);
-  transition: transform 0.5s var(--ease);
+  transition: transform 0.45s var(--ease), visibility 0.45s;
+  visibility: hidden;
+  pointer-events: none;
+  overflow-y: auto;
 }
 
 .drawer.open {
   transform: translateY(0);
+  visibility: visible;
+  pointer-events: auto;
 }
 
 .drawer a {

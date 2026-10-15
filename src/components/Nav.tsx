@@ -1,5 +1,5 @@
-import { useState } from 'react'
-import { NavLink, Link } from 'react-router-dom'
+import { useEffect, useState } from 'react'
+import { NavLink, Link, useLocation } from 'react-router-dom'
 import { navLinks, shop } from '../data/shop'
 import { asset } from '../lib/asset'
 import { MagneticButton } from './MagneticButton'
@@ -7,6 +7,18 @@ import './Nav.css'
 
 export function Nav() {
   const [open, setOpen] = useState(false)
+  const location = useLocation()
+
+  useEffect(() => {
+    setOpen(false)
+  }, [location.pathname])
+
+  useEffect(() => {
+    document.body.style.overflow = open ? 'hidden' : ''
+    return () => {
+      document.body.style.overflow = ''
+    }
+  }, [open])
 
   return (
     <>
@@ -31,9 +43,11 @@ export function Nav() {
           <div className="nav-cta">
             <MagneticButton to="/book">Book</MagneticButton>
             <button
+              type="button"
               className="menu-btn"
-              aria-label="Menu"
+              aria-label={open ? 'Close menu' : 'Open menu'}
               aria-expanded={open}
+              aria-controls="nav-drawer"
               onClick={() => setOpen((v) => !v)}
             >
               {open ? '✕' : '☰'}
@@ -41,7 +55,12 @@ export function Nav() {
           </div>
         </div>
       </header>
-      <div className={`drawer ${open ? 'open' : ''}`} hidden={!open}>
+      <div
+        id="nav-drawer"
+        className={`drawer ${open ? 'open' : ''}`}
+        aria-hidden={!open}
+        inert={!open ? true : undefined}
+      >
         {navLinks.map((l) => (
           <NavLink key={l.to} to={l.to} end={l.to === '/'} onClick={() => setOpen(false)}>
             {l.label}
