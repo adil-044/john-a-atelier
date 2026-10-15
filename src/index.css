@@ -33,6 +33,11 @@ html.lenis body {
   height: auto;
 }
 
+html {
+  /* clip not hidden — overflow-x:hidden on body breaks GSAP pin */
+  overflow-x: clip;
+}
+
 body {
   margin: 0;
   font-family: var(--font-body);
@@ -40,7 +45,7 @@ body {
   color: var(--text);
   line-height: 1.65;
   -webkit-font-smoothing: antialiased;
-  overflow-x: hidden;
+  overflow-x: clip;
 }
 
 body::before {

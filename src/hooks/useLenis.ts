@@ -5,20 +5,26 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
 gsap.registerPlugin(ScrollTrigger)
 
+declare global {
+  interface Window {
+    __lenis?: Lenis
+  }
+}
+
 export function useLenis() {
   useEffect(() => {
-    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-    if (reduced) return
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
 
     const lenis = new Lenis({
       duration: 1.15,
       smoothWheel: true,
     })
+    window.__lenis = lenis
 
     lenis.on('scroll', ScrollTrigger.update)
 
-    const scroller = document.documentElement
-    ScrollTrigger.scrollerProxy(scroller, {
+    /* Lenis + ScrollTrigger pin — same pattern as PediNN / Beau More */
+    ScrollTrigger.scrollerProxy(document.documentElement, {
       scrollTop(value) {
         if (arguments.length && typeof value === 'number') {
           lenis.scrollTo(value, { immediate: true })
@@ -34,7 +40,6 @@ export function useLenis() {
         }
       },
     })
-    ScrollTrigger.defaults({ scroller })
 
     const onRefresh = () => lenis.resize()
     ScrollTrigger.addEventListener('refresh', onRefresh)
@@ -47,12 +52,8 @@ export function useLenis() {
     return () => {
       ScrollTrigger.removeEventListener('refresh', onRefresh)
       gsap.ticker.remove(ticker)
-      ScrollTrigger.defaults({ scroller: window })
-      // Clear proxy binding so remounts don't stack ghosts
-      ScrollTrigger.scrollerProxy(scroller)
+      delete window.__lenis
       lenis.destroy()
-      ScrollTrigger.getAll().forEach((t) => t.kill())
-      ScrollTrigger.refresh()
     }
   }, [])
 }

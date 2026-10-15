@@ -3,6 +3,21 @@
   overflow: hidden;
   background: var(--ink);
   height: 100vh;
+  touch-action: pan-y;
+  cursor: grab;
+}
+
+.hgal.is-dragging {
+  cursor: grabbing;
+  touch-action: none;
+}
+
+.hgal-hint {
+  margin: 0.65rem 0 0;
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
 }
 
 .hgal-inner {
