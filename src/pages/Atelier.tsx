@@ -2,6 +2,7 @@ import { PageHero } from '../components/PageHero'
 import { Reveal } from '../components/Reveal'
 import { MagneticButton } from '../components/MagneticButton'
 import { shop } from '../data/shop'
+import { asset } from '../lib/asset'
 
 export function Atelier() {
   return (
@@ -15,7 +16,7 @@ export function Atelier() {
         <div className="container grid-2">
           <Reveal>
             <img
-              src="/brand/hero2.jpg"
+              src={asset('brand/hero2.jpg')}
               alt="John A interior"
               style={{ width: '100%', height: 'min(70vh, 560px)', objectFit: 'cover' }}
             />

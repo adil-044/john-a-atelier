@@ -1,3 +1,5 @@
+import { asset } from '../lib/asset'
+
 export const shop = {
   name: 'John A Barbershop',
   short: 'John A',
@@ -162,22 +164,22 @@ export const reviews = [
 
 export const gallery = [
   {
-    src: '/brand/hero1.jpg',
+    src: asset('brand/hero1.jpg'),
     alt: 'John A — shop atmosphere',
     credit: 'John A Barbershop',
   },
   {
-    src: '/brand/hero2.jpg',
+    src: asset('brand/hero2.jpg'),
     alt: 'Classic chair energy',
     credit: 'John A Barbershop',
   },
   {
-    src: '/brand/img2.jpg',
+    src: asset('brand/img2.jpg'),
     alt: 'Precision work',
     credit: 'John A Barbershop',
   },
   {
-    src: '/brand/img10.jpg',
+    src: asset('brand/img10.jpg'),
     alt: 'Detail finish',
     credit: 'John A Barbershop',
   },

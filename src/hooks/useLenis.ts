@@ -17,7 +17,8 @@ export function useLenis() {
 
     lenis.on('scroll', ScrollTrigger.update)
 
-    ScrollTrigger.scrollerProxy(document.documentElement, {
+    const scroller = document.documentElement
+    ScrollTrigger.scrollerProxy(scroller, {
       scrollTop(value) {
         if (arguments.length && typeof value === 'number') {
           lenis.scrollTo(value, { immediate: true })
@@ -33,6 +34,7 @@ export function useLenis() {
         }
       },
     })
+    ScrollTrigger.defaults({ scroller })
 
     const onRefresh = () => lenis.resize()
     ScrollTrigger.addEventListener('refresh', onRefresh)
@@ -45,7 +47,12 @@ export function useLenis() {
     return () => {
       ScrollTrigger.removeEventListener('refresh', onRefresh)
       gsap.ticker.remove(ticker)
+      ScrollTrigger.defaults({ scroller: window })
+      // Clear proxy binding so remounts don't stack ghosts
+      ScrollTrigger.scrollerProxy(scroller)
       lenis.destroy()
+      ScrollTrigger.getAll().forEach((t) => t.kill())
+      ScrollTrigger.refresh()
     }
   }, [])
 }

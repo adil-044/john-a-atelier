@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import { shop, navLinks } from '../data/shop'
+import { asset } from '../lib/asset'
 import './Footer.css'
 
 export function Footer() {
@@ -7,7 +8,7 @@ export function Footer() {
     <footer className="footer">
       <div className="container footer-grid">
         <div>
-          <img src="/brand/logo.png" alt="John A" className="footer-logo" />
+          <img src={asset('brand/logo.png')} alt="John A" className="footer-logo" />
           <p className="muted" style={{ marginTop: '1rem', maxWidth: '28ch' }}>
             {shop.tagline} Precision cuts. Timeless style.
           </p>

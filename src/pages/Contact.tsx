@@ -2,6 +2,7 @@ import { PageHero } from '../components/PageHero'
 import { Reveal } from '../components/Reveal'
 import { MagneticButton } from '../components/MagneticButton'
 import { shop } from '../data/shop'
+import { asset } from '../lib/asset'
 
 export function Contact() {
   return (
@@ -43,7 +44,7 @@ export function Contact() {
           </Reveal>
           <Reveal>
             <img
-              src="/brand/img10.jpg"
+              src={asset('brand/img10.jpg')}
               alt="John A"
               style={{ width: '100%', height: 'min(60vh, 480px)', objectFit: 'cover', border: '1px solid var(--line)' }}
             />

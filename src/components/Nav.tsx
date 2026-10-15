@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { NavLink, Link } from 'react-router-dom'
 import { navLinks, shop } from '../data/shop'
+import { asset } from '../lib/asset'
 import { MagneticButton } from './MagneticButton'
 import './Nav.css'
 
@@ -12,7 +13,7 @@ export function Nav() {
       <header className="nav">
         <div className="nav-inner">
           <Link to="/" className="brand" onClick={() => setOpen(false)}>
-            <img src="/brand/logo.png" alt="" />
+            <img src={asset('brand/logo.png')} alt="" />
             <span className="brand-text">John A</span>
           </Link>
           <nav className="nav-links" aria-label="Primary">

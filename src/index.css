@@ -88,7 +88,8 @@ img {
 
 .main {
   flex: 1;
-  padding-top: var(--nav-h);
+  /* nav + fixed demo banner */
+  padding-top: calc(var(--nav-h) + 2.4rem);
 }
 
 .container {
@@ -261,8 +262,11 @@ img {
 }
 
 .demo-banner {
-  position: sticky;
+  /* Fixed under nav — sticky + GSAP pin fights Lenis */
+  position: fixed;
   top: var(--nav-h);
+  left: 0;
+  right: 0;
   z-index: 40;
   background: oklch(0.2 0.03 110 / 0.85);
   border-bottom: 1px solid var(--line);

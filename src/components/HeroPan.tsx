@@ -5,6 +5,7 @@ import { SplitTitle } from './SplitTitle'
 import { MagneticButton } from './MagneticButton'
 import { Reveal } from './Reveal'
 import { shop } from '../data/shop'
+import { asset } from '../lib/asset'
 import './HeroPan.css'
 
 export function HeroPan() {
@@ -46,11 +47,11 @@ export function HeroPan() {
   return (
     <section ref={root} className="hero-pan">
       <div ref={media} className="hero-pan-media" aria-hidden>
-        <img src="/brand/hero1.jpg" alt="" width={1600} height={1000} />
+        <img src={asset('brand/hero1.jpg')} alt="" width={1600} height={1000} />
       </div>
       <div className="container hero-pan-content">
         <div className="hero-mark">
-          <img src="/brand/logo.png" alt="John A Barbershop" />
+          <img src={asset('brand/logo.png')} alt="John A Barbershop" />
           <span>London · Ontario</span>
         </div>
         <SplitTitle text="The cut should feel like a private appointment." className="h1" />
